@@ -24,7 +24,6 @@ const ProfilePage = () => {
             <div className="profile-details">
                 <p>Username: {profileData.username}</p>
                 <p>Email: {profileData.email}</p>
-                <p>Id: {profileData.id}</p>
             </div>
             <br />
             <p>The password is not shown.. sorry {":("}</p>

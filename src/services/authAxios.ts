@@ -15,9 +15,7 @@ interface LoginUser {
 
 export const api = {
     signup: async (user: SignupUser) => {
-        console.log(user)
         const { data } = await axios.post(`${URL}/signup`, user);
-        console.log(data)
         return data;
     },
 

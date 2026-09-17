@@ -11,7 +11,6 @@ export const useAuth = () => {
         mutationFn: api.signup,
         onSuccess: (data) => {
             if (data.token) {
-                console.log(data.token)
                 setToken(data.token);
                 navigate("/profile");
             }
@@ -34,8 +33,8 @@ export const useAuth = () => {
     });
 
     const logoutFn = () => {
-        logout()
-    }
+        logout();
+    };
 
     return {
         signup: signupQuery.mutate,
@@ -50,6 +49,6 @@ export const useAuth = () => {
         profilePending: profileQuery.isPending,
         profileError: profileQuery.error,
 
-        logoutFn
+        logoutFn,
     };
 };

@@ -25,9 +25,8 @@ export const signup = async (req) => {
     const users = await readProfileFile();
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    console.log(Math.max(...users.map(u => u.id)))
-    const id = Math.max(...users.map(u => u.id)) + 1
-    console.log(id)
+    const max = Math.max(...users.map(u => u.id)) + 1
+    const id = (!users || !users.length) ? 1 : max
 
     users.push({ id, username, email, password: hashedPassword });
 
