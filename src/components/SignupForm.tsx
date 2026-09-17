@@ -18,7 +18,7 @@ const SignupForm = () => {
         },
     });
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FocusEvent) => {
         e.preventDefault();
         mutate();
     };
@@ -27,7 +27,7 @@ const SignupForm = () => {
     if (error) return <p>Error: {error.message}</p>;
     return (
         <div>
-            <form className="signup-form">
+            <form onSubmit={() => handleSubmit} className="signup-form">
                 <input
                     type="text"
                     name="username"
@@ -52,7 +52,7 @@ const SignupForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" onSubmit={() => handleSubmit}>
+                <button type="submit" >
                     Signup
                 </button>
             </form>

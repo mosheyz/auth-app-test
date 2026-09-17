@@ -4,8 +4,7 @@ import cors from "cors";
 import { router as authRouter } from "./routes/authRouter.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
-const PORT = process.env.PORT;
-auth
+const PORT = process.env.PORT
 
 const app = express();
 app.use(express.json());
