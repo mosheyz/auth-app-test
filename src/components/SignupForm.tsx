@@ -1,33 +1,26 @@
-import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { api } from "../services/authAxios.ts";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.ts";
 
 const SignupForm = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const navigate = useNavigate();
+    const { signup, signupError, signupPending } = useAuth();
 
-    const { isPending, error, mutate } = useMutation({
-        mutationFn: () => api.signup({ username, email, password }),
-        onSuccess: () => {
-            console.log({ username, email, password })
-            navigate("/");
-        },
-    });
-
-    const handleSubmit = (e: React.FocusEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        mutate();
+        signup({ username, email, password });
     };
 
-    if (isPending) return <p>Signing up...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (signupPending) return <p>Signing up...</p>;
+    if (signupError) return <p>Error: {signupError.message}</p>;
     return (
         <div>
-            <form onSubmit={() => handleSubmit} className="signup-form">
+            <form
+                onSubmit={(e: React.FormEvent) => handleSubmit(e)}
+                className="signup-form"
+            >
                 <input
                     type="text"
                     name="username"
@@ -52,9 +45,7 @@ const SignupForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" >
-                    Signup
-                </button>
+                <button type="submit">Signup</button>
             </form>
         </div>
     );

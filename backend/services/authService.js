@@ -25,11 +25,17 @@ export const signup = async (req) => {
     const users = await readProfileFile();
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    users.push({ username, email, password: hashedPassword });
+    console.log(Math.max(...users.map(u => u.id)))
+    const id = Math.max(...users.map(u => u.id)) + 1
+    console.log(id)
+
+    users.push({ id, username, email, password: hashedPassword });
 
     await writeProfileFile(users);
 
-    return { message: "Register successfully" };
+    const token = jwt.sign({ id, email }, process.env.JWT_SECRET);
+
+    return { token, message: "Register successfully" };
 };
 
 export const login = async (req) => {
@@ -43,7 +49,6 @@ export const login = async (req) => {
     const users = await readProfileFile();
 
     const user = users.find((user) => user.email === email);
-    console.log(user)
     if (!user) {
         const err = new Error(`User not found`);
         err.status = 404;
@@ -51,20 +56,18 @@ export const login = async (req) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch)
     if (!isMatch) {
         const err = new Error(`unauthorized - Incorrect password`);
         err.status = 401;
         throw err;
     }
 
-    const token = jwt.sign({ email }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET);
 
     return { token, message: "Login successfully" };
 };
 
 export const getProfile = async (req) => {
-
     const users = await readProfileFile();
     const user = users.find((user) => req.user.email === user.email);
 
