@@ -11,12 +11,27 @@ const ProfilePage = () => {
 
     return (
         <div>
-            ProfilePage
-            <h2>Wellcome {profileData.username}</h2>
-            <p>User details:</p>
-            <p>Email: {profileData.email}</p>
-            <p>Id: {profileData.id}</p>
-            <button onClick={hnadleLogout}>logout</button>
+            <h2>Your profile details is right here:</h2>
+            <br />
+            <h3>
+                Wellcome{" "}
+                {profileData.username.includes(" ")
+                    ? profileData.username.split(" ")[0]
+                    : profileData.username}
+            </h3>
+            <p>Your details:</p>
+            <br />
+            <div className="profile-details">
+                <p>Username: {profileData.username}</p>
+                <p>Email: {profileData.email}</p>
+                <p>Id: {profileData.id}</p>
+            </div>
+            <br />
+            <p>The password is not shown.. sorry {":("}</p>
+            <br />
+            <button className="logout-btn" onClick={hnadleLogout}>
+                logout
+            </button>
         </div>
     );
 };

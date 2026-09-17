@@ -1,3 +1,54 @@
+
+body {
+  margin: auto;
+  padding: 20px;
+  background-color: #f8e9e9;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 10rem;
+  justify-self: center
+}
+
+input {
+  border: #f1aeae solid 1px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button {
+  background-color: #b8baff;
+  border: #a1a4fa solid 3px;
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background-color: rgb(255, 186, 186);
+  border: #fb7373 solid 3px;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-self: center;
+  justify-content: center;
+}
+.profile-details p {
+  border: #f8b7b7 solid 1px;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: fit-content;
+  min-width: 200px;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
