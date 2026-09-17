@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 export const authMiddleware = (req, res, next) => {
     try {
         const auth = req.header("Authorization");
-
-        if (!auth) {
+        if (!auth || !auth.startsWith("Bearer")) {
             const err = new Error("Unauthorized - No token");
             err.status = 401;
             throw err;
